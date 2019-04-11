@@ -8,4 +8,4 @@ Description: Library implementing IDNA2008 and TR46
 Version: @PACKAGE_VERSION@
 Cflags: -I${includedir}
 Libs: -L${libdir} -lidn2
-Libs.private: @LTLIBICONV@ @LTLIBUNISTRING@
+Libs.private: @LTLIBICONV@ @LIBUNISTRING@

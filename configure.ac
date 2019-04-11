@@ -43,11 +43,9 @@ AM_CONDITIONAL(cross_compiling,[test "$cross_compiling" = yes])
 AX_PROG_CC_FOR_BUILD
 AC_USE_SYSTEM_EXTENSIONS
 gl_EARLY
-unistring_EARLY
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 LT_INIT([win32-dll])
 gl_INIT
-unistring_INIT
 
 #
 # check for gtk-doc
@@ -118,18 +116,14 @@ if test "$enable_doc" = "yes";then
   ])
 fi
 
-if test "$ac_cv_libunistring" = "yes";then
-  AC_SEARCH_LIBS(uc_joining_type, unistring, [], [ac_cv_libunistring=no])
-fi
-
-AM_CONDITIONAL(HAVE_LIBUNISTRING, test "$ac_cv_libunistring" = "yes")
+AC_SEARCH_LIBS(uc_joining_type, unistring, [AC_SUBST([LIBUNISTRING], [$ac_cv_search_uc_joining_type])],
+               AC_MSG_ERROR([libunistring is required]))
 
 AC_CONFIG_FILES([
   Makefile
   examples/Makefile
   lib/idn2.h
   lib/Makefile
-  unistring/Makefile
   gl/Makefile
   libidn2.pc
   po/Makefile.in
@@ -150,8 +144,6 @@ AC_MSG_NOTICE([Summary of build options:
   LDFlags:           ${LDFLAGS}
   Documentation:     ${enable_doc}
   Library types:     Shared=${enable_shared}, Static=${enable_static}
-  Libiconv:          $am_cv_func_iconv $LTLIBICONV
-  Libunistring:      $ac_cv_libunistring $LIBUNISTRING_VERSION $LTLIBUNISTRING
   Valgrind:          ${VALGRIND}
   Version script:    $have_ld_version_script
 ])

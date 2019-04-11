@@ -18,10 +18,6 @@ AM_CPPFLAGS += -I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/lib -I$(srcdi
 AM_CPPFLAGS += -DLOCALEDIR=\"$(localedir)\"
 AM_CFLAGS = $(WARN_CFLAGS)
 
-if !HAVE_LIBUNISTRING
-AM_CPPFLAGS += -I$(top_srcdir)/unistring/ -I$(top_builddir)/unistring/
-endif
-
 bin_PROGRAMS = idn2
 
 idn2_SOURCES = idn2.c blurbs.h
@@ -40,10 +36,6 @@ noinst_LTLIBRARIES = libidn2_cmd.la
 libidn2_cmd_la_SOURCES =  idn2.ggo idn2_cmd.c idn2_cmd.h
 libidn2_cmd_la_LIBADD = ../gl/libgnu.la $(LTLIBUNISTRING)
 libidn2_cmd_la_CFLAGS =
-
-if !HAVE_LIBUNISTRING
-libidn2_cmd_la_LIBADD += ../unistring/libunistring.la
-endif
 
 # pattern rule (%) needed for parallel make (-j)
 idn2_cmd%c idn2_cmd%h: idn2.ggo

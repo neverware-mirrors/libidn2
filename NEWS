@@ -3,6 +3,11 @@ Copyright (C) 2011-2017 Simon Josefsson
 Copyright (C) 2018-2019 Tim Ruehsen
 See the end for copying conditions.
 
+* Version 2.x.y (unreleased)
+
+** libunistring is required
+
+
 * Version 2.1.1 (released 2019-02-08)
 
 ** Revert SONAME bump from release 2.1.0
